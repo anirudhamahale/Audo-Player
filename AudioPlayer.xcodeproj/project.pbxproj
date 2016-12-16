@@ -56,12 +56,20 @@
 			children = (
 				BCDDFF021E03DD7F00D10468 /* AppDelegate.swift */,
 				BCDDFF041E03DD7F00D10468 /* ViewController.swift */,
+				BCDDFF141E03DF3000D10468 /* Songs */,
 				BCDDFF061E03DD7F00D10468 /* Main.storyboard */,
 				BCDDFF091E03DD7F00D10468 /* Assets.xcassets */,
 				BCDDFF0B1E03DD7F00D10468 /* LaunchScreen.storyboard */,
 				BCDDFF0E1E03DD7F00D10468 /* Info.plist */,
 			);
 			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		BCDDFF141E03DF3000D10468 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Songs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +104,11 @@
 				TargetAttributes = {
 					BCDDFEFE1E03DD7D00D10468 = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
