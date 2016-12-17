@@ -42,14 +42,19 @@ class ViewController: UIViewController {
             } catch {
                 print("error")
             }
-            
-            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
-            controlCenter.nowPlayingInfo = [
-                MPMediaItemPropertyTitle: songName ?? ""
-            ]
-            
         } catch {
             print("error")
+        }
+        
+        if player.playing {
+            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
+            controlCenter.nowPlayingInfo = [
+                MPMediaItemPropertyTitle: songName ?? "Unknown",
+                //                MPMediaItemPropertyAlbumTitle: player
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: player.currentTime,
+                MPMediaItemPropertyPlaybackDuration: player.duration,
+                MPNowPlayingInfoPropertyPlaybackRate: 1.0
+            ]
         }
     }
     
@@ -83,10 +88,10 @@ class ViewController: UIViewController {
         if checkIfSongExists() {
             player.currentTime = 0
             player.play()
-            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn], animations: {
+            UIView.animateWithDuration(0.1, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn], animations: {
                 self.pause.setTitle("Pause", forState: .Normal)
                 }, completion: nil)
-            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn], animations: {
+            UIView.animateWithDuration(0.1, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseIn], animations: {
                 self.timingSlider.value = Float(self.player.currentTime)
                 }, completion: nil)
             
@@ -170,15 +175,19 @@ extension ViewController: MPMediaPickerControllerDelegate {
             } catch {
                 print("error")
             }
-            
-            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
-            controlCenter.nowPlayingInfo = [
-                MPMediaItemPropertyTitle: song.title ?? ""
-            ]
-            
-            
         } catch {
             print("error")
+        }
+        
+        if player.playing {
+            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
+            controlCenter.nowPlayingInfo = [
+                MPMediaItemPropertyTitle: song.title ?? "Unknown",
+                MPMediaItemPropertyAlbumTitle: song.albumArtist ?? "Unknown Album",
+                MPNowPlayingInfoPropertyPlaybackRate: 1.0,
+                MPMediaItemPropertyPlaybackDuration: song.playbackDuration,
+                MPNowPlayingInfoPropertyElapsedPlaybackTime: player.currentTime
+            ]
         }
     }
     
