@@ -8,13 +8,13 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class ViewController: UIViewController {
 
     var player = AVAudioPlayer()
     var songName = "Closer"
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -33,6 +33,7 @@ class ViewController: UIViewController {
             player.delegate = self
             player.volume = volume.value
             configureTimingSlider()
+            
             // configure session to play in background mode.
             let playerSession = AVAudioSession.sharedInstance()
             
@@ -62,9 +63,13 @@ class ViewController: UIViewController {
                     }, completion: nil)
             }
         } else {
-            let alert = UIAlertController(title: "Song not found", message: "Couldn't find song with name \(songName)", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+            mediaPicker.delegate = self
+            presentViewController(mediaPicker, animated: true, completion: nil)
+            
+//            let alert = UIAlertController(title: "Song not found", message: "Couldn't find song with name \(songName)", preferredStyle: .Alert)
+//            alert.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
+//            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -80,6 +85,10 @@ class ViewController: UIViewController {
                 self.timingSlider.value = Float(self.player.currentTime)
                 }, completion: nil)
             
+        } else {
+            let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+            mediaPicker.delegate = self
+            presentViewController(mediaPicker, animated: true, completion: nil)
         }
     }
     
@@ -128,13 +137,17 @@ extension ViewController: AVAudioPlayerDelegate {
     }
 }
 
-
-
-
-
-
-
-
+extension ViewController: MPMediaPickerControllerDelegate {
+    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+        for item in mediaItemCollection.items {
+            print(item.albumTitle)
+        }
+    }
+    
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
 
 
 
