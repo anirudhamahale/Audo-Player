@@ -127,6 +127,28 @@ class ViewController: UIViewController {
         }
         return true
     }
+    
+    func playSong(filePath: String) {
+        do {
+            try player = AVAudioPlayer(contentsOfURL: NSURL(string: filePath)!)
+            player.prepareToPlay()
+            player.delegate = self
+            player.volume = volume.value
+            configureTimingSlider()
+            
+            // configure session to play in background mode.
+            let playerSession = AVAudioSession.sharedInstance()
+            
+            do {
+                try playerSession.setCategory(AVAudioSessionCategoryPlayback)
+            } catch {
+                print("error")
+            }
+            
+        } catch {
+            print("error")
+        }
+    }
 }
 
 extension ViewController: AVAudioPlayerDelegate {
@@ -141,6 +163,29 @@ extension ViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
         for item in mediaItemCollection.items {
             print(item.albumTitle)
+            guard let url: NSURL = item.valueForProperty(MPMediaItemPropertyAssetURL) as? NSURL else {
+                return
+            }
+            
+            do {
+                try player = AVAudioPlayer(contentsOfURL: url)
+                player.prepareToPlay()
+                player.delegate = self
+                player.volume = volume.value
+                configureTimingSlider()
+                
+                // configure session to play in background mode.
+                let playerSession = AVAudioSession.sharedInstance()
+                
+                do {
+                    try playerSession.setCategory(AVAudioSessionCategoryPlayback)
+                } catch {
+                    print("error")
+                }
+                
+            } catch {
+                print("error")
+            }
         }
     }
     

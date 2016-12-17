@@ -301,6 +301,7 @@
 				BCDDFF131E03DD7F00D10468 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
