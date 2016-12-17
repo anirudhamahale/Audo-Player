@@ -43,6 +43,11 @@ class ViewController: UIViewController {
                 print("error")
             }
             
+            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
+            controlCenter.nowPlayingInfo = [
+                MPMediaItemPropertyTitle: songName ?? ""
+            ]
+            
         } catch {
             print("error")
         }
@@ -127,28 +132,6 @@ class ViewController: UIViewController {
         }
         return true
     }
-    
-    func playSong(filePath: String) {
-        do {
-            try player = AVAudioPlayer(contentsOfURL: NSURL(string: filePath)!)
-            player.prepareToPlay()
-            player.delegate = self
-            player.volume = volume.value
-            configureTimingSlider()
-            
-            // configure session to play in background mode.
-            let playerSession = AVAudioSession.sharedInstance()
-            
-            do {
-                try playerSession.setCategory(AVAudioSessionCategoryPlayback)
-            } catch {
-                print("error")
-            }
-            
-        } catch {
-            print("error")
-        }
-    }
 }
 
 extension ViewController: AVAudioPlayerDelegate {
@@ -187,6 +170,12 @@ extension ViewController: MPMediaPickerControllerDelegate {
             } catch {
                 print("error")
             }
+            
+            let controlCenter = MPNowPlayingInfoCenter.defaultCenter()
+            controlCenter.nowPlayingInfo = [
+                MPMediaItemPropertyTitle: song.title ?? ""
+            ]
+            
             
         } catch {
             print("error")

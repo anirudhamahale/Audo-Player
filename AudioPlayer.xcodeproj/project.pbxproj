@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCCA1A8E1E050CD500E41608 /* Closer.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BCCA1A8D1E050CD500E41608 /* Closer.mp3 */; };
 		BCDDFF031E03DD7F00D10468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDDFF021E03DD7F00D10468 /* AppDelegate.swift */; };
 		BCDDFF051E03DD7F00D10468 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCDDFF041E03DD7F00D10468 /* ViewController.swift */; };
 		BCDDFF081E03DD7F00D10468 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCDDFF061E03DD7F00D10468 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BCCA1A8D1E050CD500E41608 /* Closer.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Closer.mp3; sourceTree = "<group>"; };
 		BCDDFEFF1E03DD7E00D10468 /* AudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCDDFF021E03DD7F00D10468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCDDFF041E03DD7F00D10468 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		BCDDFF141E03DF3000D10468 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
+				BCCA1A8D1E050CD500E41608 /* Closer.mp3 */,
 			);
 			name = Songs;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			files = (
 				BCDDFF0D1E03DD7F00D10468 /* LaunchScreen.storyboard in Resources */,
 				BCDDFF0A1E03DD7F00D10468 /* Assets.xcassets in Resources */,
+				BCCA1A8E1E050CD500E41608 /* Closer.mp3 in Resources */,
 				BCDDFF081E03DD7F00D10468 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
