@@ -161,31 +161,35 @@ extension ViewController: AVAudioPlayerDelegate {
 
 extension ViewController: MPMediaPickerControllerDelegate {
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        for item in mediaItemCollection.items {
-            print(item.albumTitle)
-            guard let url: NSURL = item.valueForProperty(MPMediaItemPropertyAssetURL) as? NSURL else {
-                return
-            }
+        
+        // Get the first song from the list
+        guard let song = mediaItemCollection.items.first else {
+            return
+        }
+        
+        // Get the song URL
+        guard let url: NSURL = song.valueForProperty(MPMediaItemPropertyAssetURL) as? NSURL else {
+            return
+        }
+        
+        do {
+            try player = AVAudioPlayer(contentsOfURL: url)
+            player.prepareToPlay()
+            player.delegate = self
+            player.volume = volume.value
+            configureTimingSlider()
+            
+            // configure session to play in background mode.
+            let playerSession = AVAudioSession.sharedInstance()
             
             do {
-                try player = AVAudioPlayer(contentsOfURL: url)
-                player.prepareToPlay()
-                player.delegate = self
-                player.volume = volume.value
-                configureTimingSlider()
-                
-                // configure session to play in background mode.
-                let playerSession = AVAudioSession.sharedInstance()
-                
-                do {
-                    try playerSession.setCategory(AVAudioSessionCategoryPlayback)
-                } catch {
-                    print("error")
-                }
-                
+                try playerSession.setCategory(AVAudioSessionCategoryPlayback)
             } catch {
                 print("error")
             }
+            
+        } catch {
+            print("error")
         }
     }
     
